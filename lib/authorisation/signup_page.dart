@@ -72,13 +72,15 @@ class _RegScreenState extends State<RegScreen> {
         if (kDebugMode) {
           print("Signed in as ${userCredential.user?.email}");
         }
+        Navigator.pop(context);
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const TasksScreen()));
       }
       else{
+        Navigator.pop(context);
         showErrorDialog('OOPs an error occurred', 'Make sure the password and confirm password are same');
       }
       // Navigate to homescreen on successful signup
-      Navigator.pop(context);
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const TasksScreen()));
+
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
       showErrorDialog('Error', e.code);
@@ -126,6 +128,7 @@ class _RegScreenState extends State<RegScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         TextField(
+                          style: TextStyle(color: Colors.black87),
                           controller: nameController ,
                           decoration: const InputDecoration(
                               suffixIcon: Icon(

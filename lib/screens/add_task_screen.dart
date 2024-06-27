@@ -51,8 +51,12 @@ class AddTaskScreenState extends State<AddTaskScreen> {
           ),
           GestureDetector(
             onTap: () {
-              addTask(newTaskTitle);
-              Navigator.pop(context);
+              if(newTaskTitle.trim().isNotEmpty){
+                addTask(newTaskTitle.trim());
+                Navigator.pop(context);
+              }
+
+
             },
             child: Container(
               width: 140,
