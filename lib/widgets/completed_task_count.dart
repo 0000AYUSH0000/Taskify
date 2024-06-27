@@ -1,8 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import '../screens/tasks_screen.dart';
 
- final firestore=FirebaseFirestore.instance;
+final firestore=FirebaseFirestore.instance;
 
 Stream<int> getCompletedTasksStream(String? userEmail) {
   return firestore
@@ -15,12 +14,13 @@ Stream<int> getCompletedTasksStream(String? userEmail) {
 }
 
 class CompletedTaskCountWidget extends StatelessWidget {
-  const CompletedTaskCountWidget({super.key});
+  const CompletedTaskCountWidget({super.key, required this.userEmail});
+  final String userEmail;
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<int>(
-      stream: getCompletedTasksStream(user!.email),
+      stream: getCompletedTasksStream(userEmail),
       builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const CircularProgressIndicator();

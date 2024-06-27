@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:todoey/constants.dart';
 import 'package:todoey/screens/welcome_page.dart';
@@ -10,10 +11,10 @@ import 'package:todoey/screens/add_task_screen.dart';
 import '../widgets/total_task_count.dart';
 
 
-User? user = FirebaseAuth.instance.currentUser;
-
 class TasksScreen extends StatefulWidget {
-  const TasksScreen({super.key});
+  const TasksScreen(this.userEmail, {super.key}) ;
+
+  final String userEmail;
 
   @override
   State<TasksScreen> createState() => TasksScreenState();
@@ -22,12 +23,15 @@ class TasksScreen extends StatefulWidget {
 class TasksScreenState extends State<TasksScreen> {
 
   Widget buildBottomSheet(BuildContext context){
-    return const AddTaskScreen();
+    return  AddTaskScreen(userEmail:widget.userEmail);
   }
 
 
   @override
   Widget build(BuildContext context) {
+    if (kDebugMode) {
+      print(widget.userEmail);
+    }
     void showErrorDialog(String title, String message) {
       showDialog(
         context: context,
@@ -100,9 +104,9 @@ class TasksScreenState extends State<TasksScreen> {
                             fontSize: 35,
                             fontFamily: 'RedditMono',color: Colors.black87),
                       ),
-                      const TaskCountWidget(),
-                      const PendingTaskCountWidget(),
-                      const CompletedTaskCountWidget(),
+                       TaskCountWidget( userEmail: widget.userEmail,),
+                       PendingTaskCountWidget( userEmail:widget.userEmail,),
+                       CompletedTaskCountWidget( userEmail:widget.userEmail,),
                       const Row(
                         children: [
                           Text('Dark Mode',style: TextStyle(fontSize: 18,color: Colors.black87),),
@@ -122,7 +126,7 @@ class TasksScreenState extends State<TasksScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 7 ,vertical: 10),
                   height: 497,
                   width: double.infinity,
-                  child: TaskList(),
+                  child:  TaskList(userEmail: widget.userEmail),
                 ),
               ),
             ],

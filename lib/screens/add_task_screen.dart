@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import '../services/firebase_functions.dart';
 
 class AddTaskScreen extends StatefulWidget {
-  const AddTaskScreen({super.key});
-
+  const AddTaskScreen({super.key, required this.userEmail});
+  final String userEmail;
   @override
   AddTaskScreenState createState() => AddTaskScreenState();
 }
@@ -17,10 +17,6 @@ class AddTaskScreenState extends State<AddTaskScreen> {
     _textEditingController.dispose();
     super.dispose();
   }
-
-
-
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -52,7 +48,7 @@ class AddTaskScreenState extends State<AddTaskScreen> {
           GestureDetector(
             onTap: () {
               if(newTaskTitle.trim().isNotEmpty){
-                addTask(newTaskTitle.trim());
+                addTask(newTaskTitle.trim(),widget.userEmail);
                 Navigator.pop(context);
               }
 

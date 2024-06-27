@@ -6,7 +6,7 @@ import 'package:todoey/services/firebase_functions.dart';
 
 final firestore = FirebaseFirestore.instance;
 void showEditTaskBottomSheet(
-    BuildContext context, String taskId, String currentTask) {
+    BuildContext context, String taskId, String currentTask,String userEmail) {
 
   final TextEditingController taskController =
   TextEditingController(
@@ -42,7 +42,7 @@ void showEditTaskBottomSheet(
               onTap: () {
                 String updatedTask = taskController.text;
                 if (updatedTask.isNotEmpty) {
-                  updateTask(updatedTask, taskId);
+                  updateTask(updatedTask, taskId,userEmail);
                   Navigator.pop(context);
                 }
               },

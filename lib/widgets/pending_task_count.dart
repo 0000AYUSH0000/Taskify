@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import '../screens/tasks_screen.dart';
-
 
 final firestore=FirebaseFirestore.instance;
 Stream<int> getPendingTasksStream(String? userEmail) {
@@ -15,12 +13,13 @@ Stream<int> getPendingTasksStream(String? userEmail) {
 }
 
 class PendingTaskCountWidget extends StatelessWidget {
-  const PendingTaskCountWidget({super.key});
+  const PendingTaskCountWidget({super.key, required this.userEmail});
+  final String userEmail;
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<int>(
-      stream: getPendingTasksStream(user?.email),
+      stream: getPendingTasksStream(userEmail),
       builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const CircularProgressIndicator();

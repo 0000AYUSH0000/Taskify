@@ -15,6 +15,17 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
+  User? user;
+
+  @override
+  void initState() {
+    super.initState();
+    FirebaseAuth.instance.authStateChanges().listen((User? newUser) {
+      setState(() {
+        user = newUser;
+      });
+    });
+  }
   @override
   Widget build(BuildContext context) {
 
@@ -37,7 +48,7 @@ class _AuthScreenState extends State<AuthScreen> {
               if (kDebugMode) {
                 print("User is logged in");
               }
-              return const TasksScreen();
+              return  TasksScreen(user!.email!);
             } else {
               if (kDebugMode) {
                 print("User is not logged in");

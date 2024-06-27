@@ -8,14 +8,14 @@ class TaskTile extends StatelessWidget {
   final String taskTitle;
   final String taskID;
   final VoidCallback checkboxCallBack;
+  final String userEmail;
 
   const TaskTile({
     super.key,
     required this.isChecked,
     required this.taskTitle,
     required this.checkboxCallBack,
-
-    required this.taskID,
+    required this.taskID, required this.userEmail,
   });
 
   @override
@@ -26,7 +26,7 @@ class TaskTile extends StatelessWidget {
         children: [
           SlidableAction(
             onPressed: (context) {
-              deleteTask(taskID);
+              deleteTask(taskID,userEmail);
             },
             backgroundColor: Colors.redAccent,
             foregroundColor: Colors.white,
@@ -43,7 +43,7 @@ class TaskTile extends StatelessWidget {
           },
         ),
         title: GestureDetector(
-          onTap: () => showEditTaskBottomSheet(context, taskID, taskTitle),
+          onTap: () => showEditTaskBottomSheet(context, taskID, taskTitle,userEmail),
           child: Text(
             taskTitle,
             style: TextStyle(

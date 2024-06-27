@@ -73,7 +73,7 @@ class _RegScreenState extends State<RegScreen> {
           print("Signed in as ${userCredential.user?.email}");
         }
         Navigator.pop(context);
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const TasksScreen()));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>TasksScreen(userCredential.user!.email!)));
       }
       else{
         Navigator.pop(context);
@@ -128,7 +128,7 @@ class _RegScreenState extends State<RegScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         TextField(
-                          style: TextStyle(color: Colors.black87),
+                          style: const TextStyle(color: Colors.black87),
                           controller: nameController ,
                           decoration: const InputDecoration(
                               suffixIcon: Icon(

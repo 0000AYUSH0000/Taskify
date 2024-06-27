@@ -2,18 +2,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../services/firebase_functions.dart';
 import 'task_tile.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 
 class TaskList extends StatelessWidget {
-  const TaskList({super.key});
+  const TaskList({super.key, required this.userEmail});
+  final String userEmail;
 
   @override
   Widget build(BuildContext context) {
-    User? user = FirebaseAuth.instance.currentUser;
+
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
           .collection('users')
-          .doc(user?.email)
+          .doc(userEmail)
           .collection('todos')
           .snapshots(),
       builder: (context, snapshot) {
@@ -43,7 +44,7 @@ class TaskList extends StatelessWidget {
               taskID: taskId,
               isChecked: isDone,
               taskTitle: taskText,
-              checkboxCallBack: () => toggleTaskCompletion(taskId, isDone),
+              checkboxCallBack: () => toggleTaskCompletion(userEmail,taskId, isDone), userEmail: userEmail,
             );
             taskWidgets.add(taskWidget);
             taskWidgets.sort((a, b) {

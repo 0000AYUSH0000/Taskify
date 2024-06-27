@@ -60,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
       // Navigate to WelcomeScreen on successful login
       Navigator.pop(context);
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const TasksScreen()));
+          context, MaterialPageRoute(builder: (context) =>  TasksScreen(userCredential.user!.email!)));
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
       if (e.code == 'user-not-found') {
