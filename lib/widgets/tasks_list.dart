@@ -44,7 +44,6 @@ class TaskList extends StatelessWidget {
               isChecked: isDone,
               taskTitle: taskText,
               checkboxCallBack: () => toggleTaskCompletion(taskId, isDone),
-              deleteCallBack: () => deleteTask(taskId),
             );
             taskWidgets.add(taskWidget);
             taskWidgets.sort((a, b) {

@@ -8,14 +8,13 @@ class TaskTile extends StatelessWidget {
   final String taskTitle;
   final String taskID;
   final VoidCallback checkboxCallBack;
-  final VoidCallback deleteCallBack;
 
   const TaskTile({
     super.key,
     required this.isChecked,
     required this.taskTitle,
     required this.checkboxCallBack,
-    required this.deleteCallBack,
+
     required this.taskID,
   });
 
@@ -40,7 +39,7 @@ class TaskTile extends StatelessWidget {
         leading: Checkbox(
           value: isChecked,
           onChanged: (value) {
-            checkboxCallBack();
+           checkboxCallBack();
           },
         ),
         title: GestureDetector(
