@@ -47,6 +47,7 @@ class TaskList extends StatelessWidget {
             );
             taskWidgets.add(taskWidget);
             taskWidgets.sort((a, b) {
+
               bool isDoneA = (a as TaskTile).isChecked;
               return isDoneA ? 1 : -1;
             });
